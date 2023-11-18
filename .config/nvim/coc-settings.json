@@ -1,4 +1,5 @@
 {
+  "clangd.arguments" : ["-header-insertion=never"],
   "suggest.completionItemKindLabels": {
     "keyword": "\uf1de",
     "variable": "\ue79b",
