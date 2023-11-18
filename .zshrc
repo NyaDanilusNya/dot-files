@@ -9,6 +9,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#999999"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -70,7 +71,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git sudo zsh-autosuggestions)
+plugins=(git extract sudo zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -99,16 +100,24 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-alias c="clear"
-alias s="sudo"
-alias sai="sudo nala install"
-alias sas="nala search"
-alias sah="nala show"
-alias sar="sudo nala remove"
-alias z="cd"
-alias e="exit"
-alias v="nvim"
-alias r="rm -rf"
-alias l="ls -Alh --group-directories-first"
-alias cat='batcat'
+alias sv='sudo nvim'
+alias v='nvim'
+alias md='mkdir -p'
+alias r='rm -rf'
+alias c='clear'
+alias s='sudo'
+alias sni='sudo nala install'
+alias sns='nala search'
+alias snh='nala show'
+alias sn='sudo nala'
+function mdcd() {
+  mkdir -p $1
+  cd $1
+}
+alias ls='exa --group-directories-first --header --icons'
+alias ll='exa -lh --group-directories-first --header --icons'
+alias la='exa -lah --group-directories-first --header --icons'
+alias lt2='exa -lh --tree --level=2 --group-directories-first --header --icons'
+alias lt3='exa -lh --tree --level=3 --group-directories-first --header --icons'
+alias lt4='exa -lh --tree --level=4 --group-directories-first --header --icons'
+alias bcat='batcat'

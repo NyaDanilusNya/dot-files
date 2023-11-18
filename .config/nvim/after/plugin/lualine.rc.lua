@@ -6,26 +6,22 @@ require('lualine').setup
     theme = 'auto',
     component_separators = { left = '', right = '' },
     section_separators = { left = '', right = '' },
-    disabled_filetypes = {}
+    disabled_filetypes = { 'packer', 'neo-tree' }
   },
+
   sections =
   {
     lualine_a = {'mode'},
-    lualine_b = {'branch'},
-    lualine_c = {{
-      'filename',
-      file_status = true,
-      path = 0
-    }},
-    lualine_x = {
-      {'dignostics', sources = { 'nvim_diagnostic' }, symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' } },
-    'encoding',
-    'filetype'
+
+    lualine_b = {'branch', {'diff', symbols = { added = ' ', modified = '󰝤 ', removed = ' ' }}},
+
+    lualine_c = {{'filename', file_status = true, path = 3}
     },
-    --{'encoding', 'fileformat', 'filetype'},
-    lualine_y = {'progress'},
+    lualine_x = {{'diagnostics', sources = {'coc'}}},
+    lualine_y = {'filetype'},
     lualine_z = {'location'}
   },
+
   inactive_sections =
   {
     lualine_a = {},
@@ -39,6 +35,7 @@ require('lualine').setup
     lualine_y = {},
     lualine_z = {}
   },
+
   tabline = {},
   extensions = { 'fugitive' }
 }

@@ -2,59 +2,57 @@ vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
-  
-  use 
+
+  use
   {
-    'scrooloose/nerdtree',
-    cmd = 'NERDTreeToggle'
+    'nvim-neo-tree/neo-tree.nvim',
+    branch = 'v3.x',
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
+      'MunifTanjim/nui.nvim',
+      -- '3rd/image.nvim', -- Optional image support in preview window: See `# Preview Mode` for more information
+    }
   }
 
-  use 'jiangmiao/auto-pairs'
-  --use 'vim-airline/vim-airline'
-  use 'ryanoasis/vim-devicons'
+  --use 'jiangmiao/auto-pairs'
   --use 'mg979/vim-visual-multi'
-  --
+
   use 'tpope/vim-fugitive'
   use 'airblade/vim-gitgutter'
   use 'xuyuanp/nerdtree-git-plugin'
 
   use 'KabbAmine/vCoolor.vim'
-  --use 'williamboman/mason.nvim'
-  --use 'williamboman/mason-lspconfig.nvim'
 
   use 'nvim-lualine/lualine.nvim'
 
-  --use 'onsails/lspkind.nvim'
-  --use 'hrsh7th/cmp-buffer'
-  --use 'hrsh7th/cmp-nvim-lsp'
-  --use 'hrsh7th/cmp-path'
-  --use 'hrsh7th/cmp-cmdline'
-  --use 'hrsh7th/nvim-cmp'
-  --use 'saadparwaiz1/cmp_luasnip'
-  --use 'neovim/nvim-lspconfig'
-  --use 'L3MON4D3/LuaSnip'
---[[
-  use {
-  'nvim-treesitter/nvim-treesitter',
-  run = function()
-    local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
-    ts_update()
-  end,
-  }
-  ]]
-  --[[
-  use 
+  use
   {
     'nvim-treesitter/nvim-treesitter',
-    ["do"] = ':TSUpdate'
+    run = ':TSUpdate',
   }
-  ]]
-  --use 'williamboman/nvim-lsp-installer'
-  use {
+  use
+  {
     'neoclide/coc.nvim',
     branch = 'release'
   }
-  --use 'dylanaraps/wal.vim'
   --use 'ellisonleao/gruvbox.nvim'
-  use 'gruvbox-community/gruvbox'
+  --use 'gruvbox-community/gruvbox.nvim'
+  use 'andweeb/presence.nvim'
+  use 'p00f/nvim-ts-rainbow'
+  use 'nvim-treesitter/playground'
+  use 'nanozuki/tabby.nvim'
+  use
+  {
+    'nvim-telescope/telescope.nvim',
+    requires =
+    {
+      'nvim-lua/plenary.nvim',
+      'sharkdp/fd',
+    }
+  }
+
+  if PACKER_BOOTSTRAP then
+    require'packer'.sync()
+  end
 end)

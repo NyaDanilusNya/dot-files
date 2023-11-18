@@ -3,7 +3,7 @@
 vim.wo.number = true
 vim.wo.cursorline = true
 vim.wo.cursorcolumn = false
-vim.wo.wrap = true
+vim.wo.wrap = false
 vim.o.mouse = 'a'
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
@@ -11,12 +11,13 @@ vim.o.softtabstop = 2
 vim.o.expandtab = true
 vim.o.shiftround = true
 vim.o.autoindent = true
-vim.o.scrolloff = 10
+vim.o.scrolloff = 5
 vim.o.backspace='indent,eol,start'
 vim.o.laststatus=2
 vim.o.showmode = true
 vim.o.showcmd = true
-vim.o.foldmethod = 'indent'
+vim.o.showtabline = 2
+--vim.o.foldmethod = 'indent'
 --vim.o.matchpairs:append('<:>')
 vim.o.list = true
 vim.o.listchars='tab:›\\ ,trail:•,extends:#,nbsp:.'
@@ -28,8 +29,8 @@ vim.o.smartcase = true
 vim.o.viminfo = "'100,<9999,s100"
 vim.o.swapfile = true
 vim.o.syntax = true
-vim.o.background = "dark" -- or "light" for light mode
-vim.cmd([[colorscheme gruvbox]])
+--vim.o.background = "dark" -- or "light" for light mode
+--vim.cmd([[colorscheme gruvbox]])
 --[[
 local colorscheme = "wal"
 local ok,_ = pcall(vim.cmd, "colorscheme " .. colorscheme)
