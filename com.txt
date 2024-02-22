@@ -1,0 +1,112 @@
+cvt xxx xxx - создание строки для разрешения
+xrandr --newmode "modeline" - добавить новое разрешение
+xrandr --listactivemonitors - доступные мониторы
+xrandr --addmode eDP-1 "1304x649_60.00" - добавляем режим
+xrandr --output eDP-1 --mode 1400x810 - меняем на это
+
+https://www.sitepoint.com/zsh-tips-tricks/ - oh my zsh
+https://phoenixnap.com/kb/mount-ntfs-linux - mount ntfs
+
+sudo nala history undo last
+
+/etc/X11/xorg.conf.d/00-keyboard.conf - настройка клавиатуры
+Section "InputClass"
+  Identifier "system-keyboard"
+  Option "XkbLayout" "us,ru"
+  Option "XkbModel" "pc104"
+  Option "XkbOptions" "grp:alt_shift_toggle,grp_led:scroll,compose:ralt"
+EndSection
+
+xdg-settings set default-web-browser name-of-browser.desktop - установка браузера по умолчанию
+
+kbdd - утилита для индивидуальной настройки раскладки для каждого окна
+
+lib32-alsa-plugins lib32-libpulse lib32-openal - звук в играх
+
+wine winetricks
+
+Переключить на amdgpu
+/etc/default/grub
+radeon.cik_support=0 amdgpu.cik_support=1 radeon.si_support=0 amdgpu.si_support=1
+
+yt-dlp -x --audio-format mp3
+
+pacmd load-module module-alsa-source source_properties=device.description=DroidCam device=hw:Loopback,1,0
+
+git config --global credential.helper store
+
+dpkg -L -S
+
+
+/etc/grub.d/40_custom
+#!/bin/sh
+exec tail -n +3 $0
+# This file provides an easy way to add custom menu entries.  Simply type the
+# menu entries you want to add after this comment.  Be careful not to change
+# the 'exec tail' line above.
+
+menuentry "Windows" {
+insmod part_msdos
+insmod ntfs
+set root='(hd1,msdos1)'
+chainloader +1
+}
+
+
+~/.oh-my-zsh/custom/themes/danilus-shell.zsh-theme
+function preexec() {
+  timer=$(($(date +%s%0N)/1000000))
+}
+
+_fix_cursor() {
+   echo -ne '\e[6 q'
+}
+
+precmd_functions+=(_fix_cursor)
+
+function precmd() {
+  if [ $timer ]; then
+    now=$(($(date +%s%0N)/1000000))
+    elapsed=$(($now-$timer))
+
+    export TIME_ELAPSED=" %F{cyan}${elapsed}ms%{$reset_color%}"
+    unset timer
+  fi
+}
+CY="%{$fg[yellow]%}"
+CR="%{$fg[red]%}"
+CBR="%{$fg_bold[red]%}"
+CM="%{$fg[magenta]%}"
+CRE="%{$reset_color%}"
+if [[ "$SSH_CONNECTION" ]]; then
+PROMPT=$'${CM}╭[${CY}$(date +"%H%{\e[5m%}:%{\e[m${CY}%}%M%{\e[5m%}:%{\e[m${CY}%}%S")${CRE} ${CBR}%c${CRE}$(git_super_status)$TIME_ELAPSED${CM}] ${CM}[${CR}${HOST}${CM}]
+╰%(?:${CRE}:${CR}%?${CRE})${CM}%{\e[5m%}>%{\e[m%} '
+else
+PROMPT=$'${CM}╭[${CY}$(date +"%H%{\e[5m%}:%{\e[m${CY}%}%M%{\e[5m%}:%{\e[m${CY}%}%S")${CRE} ${CBR}%c${CRE}$(git_super_status)$TIME_ELAPSED${CM}]
+╰%(?:${CRE}:${CR}%?${CRE})${CM}%{\e[5m%}>%{\e[m%} '
+fi
+
+ZSH_THEME_GIT_PROMPT_PREFIX=" "
+ZSH_THEME_GIT_PROMPT_SUFFIX=""
+ZSH_THEME_GIT_PROMPT_HASH_PREFIX=":"
+ZSH_THEME_GIT_PROMPT_SEPARATOR=" "
+ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[magenta]%}"
+ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[red]%}%{●%G%}"
+ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[red]%}%{✖%G%}"
+ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[blue]%}%{✚%G%}"
+ZSH_THEME_GIT_PROMPT_BEHIND="%{↓%1G%}"
+ZSH_THEME_GIT_PROMPT_BEHIND_AHEAD_SEPARATOR=""
+ZSH_THEME_GIT_PROMPT_BEHIND_AHEAD_SECTION_SEPARATOR=" "
+ZSH_THEME_GIT_PROMPT_AHEAD="%{↑%1G%}"
+ZSH_THEME_GIT_PROMPT_STASHED="%{$fg_bold[blue]%}%{⚑%G%}"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%}%{…%G%}"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}%{✔%G%}"
+ZSH_THEME_GIT_PROMPT_LOCAL=" L"
+# The remote branch will be shown between these two
+ZSH_THEME_GIT_PROMPT_UPSTREAM_FRONT=" {%{$fg[blue]%}"
+ZSH_THEME_GIT_PROMPT_UPSTREAM_END="%{${reset_color}%}}"
+ZSH_THEME_GIT_PROMPT_MERGING="%{$fg_bold[magenta]%}|MERGING%{${reset_color}%}"
+ZSH_THEME_GIT_PROMPT_REBASE="%{$fg_bold[magenta]%}|REBASE%{${reset_color}%} "
+ZSH_THEME_GIT_PROMPT_BISECT="%{$fg_bold[magenta]%}|BISECT%{${reset_color}%} "
+
+
